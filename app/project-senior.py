@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import torch
+import torch as torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
@@ -10,13 +10,15 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-# get_ipython().run_line_magic('matplotlib', 'inline')
+import syft as sy
 
 # ignore harmless warnings
 import warnings
 warnings.filterwarnings("ignore")
-
 def main():
+    
+    hook = sy.TorchHook(torch)
+
     train_transform_a = transforms.Compose([
             transforms.GaussianBlur((3,3)),     
             transforms.RandomHorizontalFlip(),  # reverse 50% of images
@@ -66,14 +68,6 @@ def main():
     # we assign the .dataset of our subset to be equal to the subset iself
     # in other words trainset has the correct images (6247), trainset.dataset references the parent dataset, which is
     # about 18000 images long. We dont want any reference to the parent data set. I think?
-    # trainset_a.dataset = trainset_a
-    # trainset_b.dataset = trainset_b
-    # trainset_c.dataset = trainset_c
-    print(len(trainset_a))
-    print(len(trainset_a.dataset))
-    # print(len(trainset_a.dataset))
-    # print(len(trainset_b))
-    # print(len(trainset_c))
 
     # We Split the train set into 3 subsets, then apply a transformation to each of these subsets.
     # This will serve as a way to "simulate" federated learning (a.k.a multiple users with their own data set and transformation)
