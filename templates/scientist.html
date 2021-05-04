@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1>Upload your model to start training it with data owner's data!</h1>
+    <img src = "/static/pydusa-logo-transparent.png" width="300" height="300" alt="PyDusa">
+    <form action="/scientist" enctype="multipart/form-data" method="POST">
+        <input type="file" name="file">
+        <input type="submit" value="upload">
+    </form>
+{% endblock content %}

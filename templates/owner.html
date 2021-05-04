@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1>Upload your data to start sharing it with multiple scientists!</h1>
+    <img src = "/static/pydusa-logo-transparent.png" width="300" height="300" alt="PyDusa">
+    <form action="/owner" enctype="multipart/form-data" method="POST">
+        <input type="file" name="file">
+        <input type="submit" value="upload">
+    </form>
+{% endblock content %}
